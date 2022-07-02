@@ -21,8 +21,8 @@ Check price update
   @{price_updates}  ws_client.get_price_updates  ${ws}
   FOR  ${update}  IN  @{price_updates}
     Should Be Equal  ${symbol}  ${update}[s]
-	Should Be True  ${update}[p] > 0
-	Should Be True  ${update}[v] > 0
+    Should Be True  ${update}[p] > 0
+    Should Be True  ${update}[v] > 0
   END
   [Teardown]  ws_client.close_connection  ${ws}
   
@@ -39,10 +39,10 @@ Get performance statistics
   @{responses_list}  Create List
   FOR  ${i}  IN RANGE  ${count}
     ${start_time}  Get Current Date
-	rest_client.execute_get_request  ${endpoint}  ${params}
-	${end_time}  Get Current Date
-	${response_time}  Subtract Date From Date  ${end_time}  ${start_time}
-	Append To List  ${responses_list}  ${response_time}
+    rest_client.execute_get_request  ${endpoint}  ${params}
+    ${end_time}  Get Current Date
+    ${response_time}  Subtract Date From Date  ${end_time}  ${start_time}
+    Append To List  ${responses_list}  ${response_time}
   END
   get_statistics_for_endpoint  ${endpoint}  ${responses_list}
   

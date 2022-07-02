@@ -1,6 +1,6 @@
 *** Settings ***
-Library  web_socket_client.WebSocketClient  cat0uriad3icrc16cka0  WITH NAME  ws_client
-Library  rest_api_client.RestApiClient  cat0uriad3icrc16cka0  WITH NAME  rest_client
+Library  web_socket_client.WebSocketClient  *TOKEN*  WITH NAME  ws_client
+Library  rest_api_client.RestApiClient  *TOKEN*  WITH NAME  rest_client
 
 
 *** Variables ***

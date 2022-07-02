@@ -6,8 +6,8 @@ Library  rest_api_client.RestApiClient  *TOKEN*  WITH NAME  rest_client
 *** Variables ***
 ${symbol}  AMZN
 ${forex_exchange}  fxcm
-${endpoint}  symbols
-&{params}=  exchange=fxcm
+${endpoint}  symbol
+&{params}=  exchange=oanda
 
 
 *** Test Cases ***

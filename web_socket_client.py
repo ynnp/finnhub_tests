@@ -19,7 +19,7 @@ class WebSocketClient(object):
         return url
 
 
-    def open_web_socket_connection(self) -> websocket:
+    def open_connection(self) -> websocket:
         web_socket = websocket.WebSocket()
         web_socket.connect(self.__url)
         logger.info("Opened web socket to {0} host.".format(WebSocketClient.HOST))
@@ -41,6 +41,6 @@ class WebSocketClient(object):
         return updates["data"]
 
 
-    def close_web_socket_connection(self, web_socket: websocket) -> None:
+    def close_connection(self, web_socket: websocket) -> None:
         web_socket.close()
         logger.info("Web socket was closed.")

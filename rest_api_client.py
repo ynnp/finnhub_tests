@@ -38,14 +38,6 @@ class RestApiClient(object):
         return symbols
         
     
-    def get_response_time(self, endpoint: str, params: dict, count: int = 30) -> list:
+    def execute_get_request(self, endpoint: str, params: dict) -> None:
         url = "{api_url}/{endpoint}".format(api_url=self.api_url, endpoint=endpoint)
-        response_time = []
-        logger.info("Accessing {endpoint} endpoint for {count} times.".format(endpoint=endpoint.upper(), count=count))
-        for _ in range(count):
-            start_time = time.perf_counter()
-            requests.get(url, params=params, headers=self.__auth_header)
-            elapsed_time = time.perf_counter() - start_time
-            response_time.append(elapsed_time)
-        
-        return response_time
+        requests.get(url, params=params, headers=self.__auth_header)

@@ -5,7 +5,7 @@ from robot.api import logger
 
 
 def get_symbols_list(forex_exchange: str) -> list:
-        return constants.SYMBOLS[forex_exchange]
+    return constants.SYMBOLS[forex_exchange]
         
  
 def get_statistics_for_endpoint(endpoint: str, response_time: list) -> None:

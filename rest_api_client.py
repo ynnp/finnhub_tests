@@ -44,7 +44,7 @@ class RestApiClient(object):
         logger.info("Accessing {endpoint} endpoint for {count} times.".format(endpoint=endpoint.upper(), count=count))
         for _ in range(count):
             start_time = time.perf_counter()
-            self.__session.get(url, params=params)
+            requests.get(url, params=params, headers=self.__auth_header)
             elapsed_time = time.perf_counter() - start_time
             response_time.append(elapsed_time)
         

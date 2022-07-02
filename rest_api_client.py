@@ -1,7 +1,4 @@
-import constants
-
 import requests
-import statistics
 import time
 from robot.api import logger
 
@@ -50,18 +47,3 @@ class RestApiClient(object):
             response_time.append(elapsed_time)
         
         return response_time
-    
-    
-    @staticmethod
-    def get_symbols_list(forex_exchange: str) -> list:
-        return constants.SYMBOLS[forex_exchange]
-        
-    
-    @staticmethod
-    def get_statistics_for_endpoint(endpoint: str, response_time: list) -> None:
-        average_time = statistics.mean(response_time)
-        standard_deviation = statistics.stdev(response_time)
-        
-        logger.info("{endpoint} endpoint:".format(endpoint=endpoint.upper()))
-        logger.info("- mean time = {time} s".format(time=round(average_time, 5)))
-        logger.info("- standart deviation = {stdev} s".format(stdev=round(standard_deviation, 5)))  

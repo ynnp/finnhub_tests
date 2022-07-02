@@ -1,10 +1,11 @@
 *** Settings ***
 Library  web_socket_client.WebSocketClient  *TOKEN*  WITH NAME  ws_client
 Library  rest_api_client.RestApiClient  *TOKEN*  WITH NAME  rest_client
+Library  helpers
 
 
 *** Variables ***
-${symbol}  AMZN
+${symbol}  BINANCE:BTCUSDT
 ${forex_exchange}  fxcm
 ${endpoint}  symbol
 &{params}=  exchange=oanda
@@ -13,7 +14,7 @@ ${endpoint}  symbol
 *** Test Cases ***
 Check price update
   ${ws}  ws_client.open_web_socket_connection
-  ws_client.subscribe_to_symbol  ${ws}  ${symbol}
+  ws_client.subscribe_to_last_price_updates  ${ws}  ${symbol}
   @{price_updates}  ws_client.get_price_updates  ${ws}
   FOR  ${update}  IN  @{price_updates}
     Should Be Equal  ${symbol}  ${update}[s]
@@ -25,7 +26,7 @@ Check price update
   
 Check symbols for forex exchange
   @{symbols}  rest_client.get_symbols_for_forex_exchange  ${forex_exchange}
-  @{static_list}  rest_client.get_symbols_list  ${forex_exchange}
+  @{static_list}  get_symbols_list  ${forex_exchange}
   FOR  ${symbol}  IN  @{static_list}
     Should contain  ${symbols}  ${symbol}
   END
@@ -33,4 +34,4 @@ Check symbols for forex exchange
   
 Get performance statistics
   @{response_time}  rest_client.get_response_time  ${endpoint}  ${params}
-  rest_client.get_statistics_for_endpoint  ${endpoint}  ${response_time}
+  get_statistics_for_endpoint  ${endpoint}  ${response_time}

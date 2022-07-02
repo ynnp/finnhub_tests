@@ -1,6 +1,5 @@
 import json
 import websocket
-
 from robot.api import logger
     
 
@@ -28,7 +27,7 @@ class WebSocketClient(object):
         return web_socket
         
         
-    def subscribe_to_symbol(self, web_socket: websocket, symbol: str) -> None:
+    def subscribe_to_last_price_updates(self, web_socket: websocket, symbol: str) -> None:
         data = {"type": "subscribe", "symbol": symbol}
         web_socket.send(json.dumps(data))
         logger.info("Successfully subscribed to {0}.".format(symbol))
